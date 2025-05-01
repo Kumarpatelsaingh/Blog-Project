@@ -2,9 +2,9 @@ name: Django CI with SQLite
 
 on:
   push:
-    branches: [main]
+    branches: [workflow]
   pull_request:
-    branches: [main]
+    branches: [workflow]
 
 jobs:
   test:
