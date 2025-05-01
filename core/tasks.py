@@ -1,10 +1,11 @@
 # blogging/tasks.py
 
-from celery import shared_task
-from .models import Post, Comment
-from django.core.mail import send_mail
-from django.contrib.auth.models import User
 from time import sleep
+
+from celery import shared_task
+from django.core.mail import send_mail
+
+from .models import Comment, Post
 
 
 # Task for sending email after post creation (simulate email sending delay)
@@ -20,7 +21,7 @@ def send_post_creation_email(post_id):
 
     # Simulate a delay to demonstrate asynchronous behavior
     sleep(5)
-    send_mail(subject, message, 'from@example.com', recipient_list)
+    send_mail(subject, message, "from@example.com", recipient_list)
 
     return f"Post creation email sent to {user.email}"
 
@@ -38,6 +39,6 @@ def send_comment_creation_email(comment_id):
 
     # Simulate a delay
     sleep(5)
-    send_mail(subject, message, 'from@example.com', recipient_list)
+    send_mail(subject, message, "from@example.com", recipient_list)
 
     return f"Comment creation email sent to {user.email}"

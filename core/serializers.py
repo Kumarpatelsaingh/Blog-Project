@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from authentication.serializers import UserDataSerializer
-from core.models import Comment, Follow, Like, Post, Student, Course, Teacher
+from core.models import Comment, Course, Follow, Like, Post, Student, Teacher
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -75,16 +75,16 @@ class FollowingsSerializer(serializers.ModelSerializer):
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ['id', 'name', 'roll', 'address', 'email', 'courses']
+        fields = ["id", "name", "roll", "address", "email", "courses"]
 
 
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ['id', 'name']
+        fields = ["id", "name"]
 
 
 class TeacherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Teacher
-        fields = ['name']
+        fields = ["name"]

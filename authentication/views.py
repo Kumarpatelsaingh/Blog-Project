@@ -1,14 +1,12 @@
 from django.contrib.auth import authenticate
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.permissions import IsAuthenticated
+
 from authentication.renderers import UserRenderer
-from authentication.serializers import (
-    UserLoginSerializer,
-    UserSignupSerializer,
-)
+from authentication.serializers import UserLoginSerializer, UserSignupSerializer
 
 
 # Generating Token
@@ -55,9 +53,7 @@ class UserLogin(APIView):
                 return Response(
                     {
                         "errors": {
-                            "non_field_errors": [
-                                "Email or Password is not Valid!"
-                            ]
+                            "non_field_errors": ["Email or Password is not Valid!"]
                         }
                     },
                     status=status.HTTP_400_BAD_REQUEST,

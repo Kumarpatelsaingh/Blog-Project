@@ -15,8 +15,7 @@ from django.db import models
 
 class UserManager(BaseUserManager):
     def create_user(
-        self, email, first_name, last_name,
-        gender, password=None, password2=None
+        self, email, first_name, last_name, gender, password=None, password2=None
     ):
         """
         Creates and saves a User with the given email, first_name, last_name,
@@ -36,8 +35,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, first_name,
-                         last_name, gender, password=None):
+    def create_superuser(self, email, first_name, last_name, gender, password=None):
         """
         Creates and saves a superuser with the given email, first_name,
         last_name, gender and password.

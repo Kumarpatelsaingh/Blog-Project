@@ -7,8 +7,7 @@ from authentication.models import User
 
 
 class Post(models.Model):
-    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4,
-                            editable=False)
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=30)
     content = models.CharField(max_length=500)
@@ -26,8 +25,7 @@ class BaseLikeComment(models.Model):
 
 
 class Like(BaseLikeComment):
-    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4,
-                            editable=False)
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
@@ -42,8 +40,7 @@ class Like(BaseLikeComment):
 
 
 class Comment(BaseLikeComment):
-    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4,
-                            editable=False)
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     content = models.TextField(default="No content provided")
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
@@ -57,10 +54,8 @@ class Comment(BaseLikeComment):
 
 
 class Follow(models.Model):
-    uuid = models.UUIDField(primary_key=True,
-                            default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE,
-                             related_name="user")
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user")
     user_following = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="user_following"
     )
@@ -84,8 +79,9 @@ class Teacher(models.Model):
 
 class Course(models.Model):
     name = models.CharField(max_length=100)
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,
-                                related_name='courses')
+    teacher = models.ForeignKey(
+        Teacher, on_delete=models.CASCADE, related_name="courses"
+    )
 
     def __str__(self):
         return self.name
@@ -96,7 +92,7 @@ class Student(models.Model):
     roll = models.CharField(max_length=20, unique=True)
     address = models.TextField()
     email = models.EmailField(unique=True)
-    courses = models.ManyToManyField(Course, related_name='students')
+    courses = models.ManyToManyField(Course, related_name="students")
 
     def __str__(self):
         return self.name

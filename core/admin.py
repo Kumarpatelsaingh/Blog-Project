@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Post,  Like, Comment, Follow, Teacher, Course, Student
+from .models import Comment, Course, Follow, Like, Post, Student, Teacher
 
 
 # Register your models here.
@@ -16,7 +16,7 @@ class LikeAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ["uuid",  "post", "content"]
+    list_display = ["uuid", "post", "content"]
 
 
 @admin.register(Follow)
@@ -39,5 +39,6 @@ class StudentAdmin(admin.ModelAdmin):
     list_display = ["name", "roll", "email", "display_courses", "address"]
 
     def display_courses(self, obj):
-        return ', '.join(course.name for course in obj.courses.all())
-    display_courses.short_description = 'Courses'
+        return ", ".join(course.name for course in obj.courses.all())
+
+    display_courses.short_description = "Courses"
