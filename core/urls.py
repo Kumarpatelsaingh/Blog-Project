@@ -65,19 +65,4 @@ urlpatterns = [
     path("like/create/", LikeCreateAPIView.as_view(), name="likecreate"),
     path("like/get/<uuid:pk>/", LikeRetrieveAPIView.as_view(), name="likeget"),
     path("like/list/", LikeListAPIView.as_view(), name="likelist"),
-    # path("students/name/", StudentByNameAPIView.as_view(), name="student-by-name"),
-    # path("students/email/", StudentByEmailAPIView.as_view(), name="student-by-name"),
-    # path(
-    #     "students/teacher/",
-    #     StudentLearnByTeacherAPIView.as_view(),
-    #     name="student-by-teacher",
-    # ),
-    # path(
-    #     "students/exclude/", StudentsExcludingSAPIView.as_view(), name="student-by-name"
-    # ),
-    # path("students/total/", TotalStudentsAPIView.as_view(), name="student-total"),
-    # path(
-    #     "students/subject/", StudentEnrolledSubjectAPIView.as_view(), name="student-sub"
-    # ),
-    # path("students/all/", StudentFilterAPIView.as_view(), name="student-sub"),
 ]
