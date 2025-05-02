@@ -1,18 +1,53 @@
+# name: Django CI with SQLite
+
+# on:
+#   push:
+#     branches: [workflow]
+#   pull_request:
+#     branches: [workflow]
+
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+
+#     env:
+#         DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+
+#         DEBUG: True
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+
+#       - name: Set up Python
+#         uses: actions/setup-python@v4
+#         with:
+#           python-version: '3.10'
+
+#       - name: Install dependencies
+#         run: |
+#           python -m pip install --upgrade pip
+#           pip install -r requirements.txt
+
+#       - name: Run migrations and tests
+#         run: |
+#           python manage.py migrate
+#           python manage.py test
+
 name: Django CI with SQLite
 
 on:
   push:
-    branches: [workflow]
+    branches: [main]
   pull_request:
-    branches: [workflow]
+    branches: [main]
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     env:
-        DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-
+        DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
         DEBUG: True
 
     steps:
@@ -24,12 +59,25 @@ jobs:
         with:
           python-version: '3.10'
 
+      - name: Cache Python dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Set up .env file
+        run: |
+          echo "DJANGO_SECRET_KEY=${{ secrets.SECRET_KEY }}" > .env
+          echo "DEBUG=True" >> .env
+
       - name: Run migrations and tests
         run: |
           python manage.py migrate
-          python manage.py test
+          pytest
