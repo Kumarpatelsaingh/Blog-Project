@@ -1,39 +1,3 @@
-# name: Django CI with SQLite
-
-# on:
-#   push:
-#     branches: [workflow]
-#   pull_request:
-#     branches: [workflow]
-
-# jobs:
-#   test:
-#     runs-on: ubuntu-latest
-
-#     env:
-#         DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-
-#         DEBUG: True
-
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v3
-
-#       - name: Set up Python
-#         uses: actions/setup-python@v4
-#         with:
-#           python-version: '3.10'
-
-#       - name: Install dependencies
-#         run: |
-#           python -m pip install --upgrade pip
-#           pip install -r requirements.txt
-
-#       - name: Run migrations and tests
-#         run: |
-#           python manage.py migrate
-#           python manage.py test
-
 name: Django CI with SQLite
 
 on:
@@ -47,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-        DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
         DEBUG: True
 
     steps:
