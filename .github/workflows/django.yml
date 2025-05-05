@@ -41,8 +41,11 @@ jobs:
           echo "DJANGO_SECRET_KEY=${{ secrets.SECRET_KEY }}" > .env
           echo "DEBUG=True" >> .env
 
-      - name: Run migrations and tests
+      - name: run migrations
         run: |
           python manage.py migrate
+    
+      - name: Run  tests
+        run: |
           pytest
           
